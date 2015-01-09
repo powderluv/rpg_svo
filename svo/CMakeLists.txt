@@ -126,6 +126,14 @@ ADD_LIBRARY(svo SHARED ${SOURCEFILES})
 TARGET_LINK_LIBRARIES(svo ${LINK_LIBS})
 
 ################################################################################
+# Install targets
+
+IF(NOT USE_ROS)
+  INSTALL(DIRECTORY include/svo DESTINATION ${CMAKE_INSTALL_PREFIX}/include FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp")
+  INSTALL(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib )
+ENDIF()
+
+################################################################################
 # TESTS
 
 ADD_EXECUTABLE(test_feature_align test/test_feature_alignment.cpp)
