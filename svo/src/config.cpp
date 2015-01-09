@@ -54,7 +54,11 @@ Config::Config() :
     quality_max_drop_fts(vk::getParam<int>("svo/quality_max_drop_fts", 40))
 #else
     trace_name("svo"),
+#ifdef ANDROID
+    trace_dir("/data/local/tmp"),
+#else
     trace_dir("/tmp"),
+#endif
     n_pyr_levels(3),
     use_imu(false),
     core_n_kfs(3),
