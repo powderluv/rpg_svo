@@ -122,7 +122,7 @@ IF(HAVE_G2O)
 ENDIF(HAVE_G2O)
 
 # Create svo library
-ADD_LIBRARY(svo SHARED ${SOURCEFILES})
+ADD_LIBRARY(svo STATIC ${SOURCEFILES})
 TARGET_LINK_LIBRARIES(svo ${LINK_LIBS})
 
 ################################################################################
@@ -136,6 +136,7 @@ ENDIF()
 ################################################################################
 # TESTS
 
+IF(NOT ANDROID)
 ADD_EXECUTABLE(test_feature_align test/test_feature_alignment.cpp)
 TARGET_LINK_LIBRARIES(test_feature_align svo)
 
@@ -156,3 +157,4 @@ TARGET_LINK_LIBRARIES(test_sparse_img_align svo)
 
 ADD_EXECUTABLE(test_pose_optimizer test/test_pose_optimizer.cpp)
 TARGET_LINK_LIBRARIES(test_pose_optimizer svo) 
+ENDIF()
