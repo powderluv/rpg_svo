@@ -111,6 +111,13 @@ public:
   /// Return the pose of the frame in the (w)orld coordinate frame.
   inline Vector3d pos() const { return T_f_w_.inverse().translation(); }
 
+  /// Return the pose of the frame in the (w)orld coordinate frame in cv::Mat.
+  inline cv::Mat pos_mat() const {
+      Vector3d pos_vec = T_f_w_.inverse().translation();
+      cv::Vec3d pos_cv_vec(pos_vec[0], pos_vec[1], pos_vec[2]);
+      return cv::Mat(pos_cv_vec);
+  }
+
   /// Frame jacobian for projection of 3D point in (f)rame coordinate to
   /// unit plane coordinates uv (focal length = 1).
   inline static void jacobian_xyz2uv(
